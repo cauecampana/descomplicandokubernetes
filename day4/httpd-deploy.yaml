@@ -1,0 +1,59 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: httpd
+  name: httpd
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: httpd
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 2
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: httpd
+    spec:
+      containers:
+        - image: httpd:latest
+          name: apache
+          ports:
+            - containerPort: 80
+          resources:
+            limits:
+              cpu: "0.5"
+              memory: 256Mi
+            requests:
+              cpu: "0.3"
+              memory: 64Mi
+          startupProbe:
+            httpGet:
+              path: /
+              port: 80
+            timeoutSeconds: 15
+            successThreshold: 1
+            initialDelaySeconds: 30
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            timeoutSeconds: 15
+            successThreshold: 1
+            initialDelaySeconds: 30
+            failureThreshold: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            timeoutSeconds: 15
+            successThreshold: 1
+            initialDelaySeconds: 30
+            failureThreshold: 3
+            periodSeconds: 10

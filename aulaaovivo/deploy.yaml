@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: meu-servico
+  name: meu-servico
+  namespace: producao
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: meu-servico
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: meu-servico
+        version: "v2-problematica"
+    spec:
+      containers:
+      - image: linuxtips/memory-eater:0.2
+        name: meu-servico
+        resources:
+          limits:
+            memory: 32Mi
