@@ -36,3 +36,7 @@ This repository contains my hands-on studies and practical labs focused on under
 ## 🎯 Goal
 
 This project is part of my continuous learning path to strengthen my skills as a **DevOps / Site Reliability Engineer (SRE)**, focusing on reliability, scalability and cloud-native infrastructure.
+
+## 📚 Learning Source
+
+Hands-on labs and studies based on the **"Descomplicando Kubernetes"** course by **LinuxTips**, taught by **Jeferson Fernando**, a recognized Kubernetes and DevOps expert in the cloud-native community.
